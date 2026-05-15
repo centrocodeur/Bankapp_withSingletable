@@ -1,14 +1,12 @@
 package com.marien.ebankingbackend;
 
-import com.marien.ebankingbackend.entities.AccountOperation;
-import com.marien.ebankingbackend.entities.CurrentAccount;
-import com.marien.ebankingbackend.entities.Customer;
-import com.marien.ebankingbackend.entities.SavingAccount;
+import com.marien.ebankingbackend.entities.*;
 import com.marien.ebankingbackend.enums.AccountStatus;
 import com.marien.ebankingbackend.enums.OperationType;
 import com.marien.ebankingbackend.repositories.AccountOperationRepository;
 import com.marien.ebankingbackend.repositories.BankAccountRepository;
 import com.marien.ebankingbackend.repositories.CustomerRepository;
+import com.marien.ebankingbackend.services.BankService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,7 +24,16 @@ public class EbankingBackendApplication {
     }
 
 
+
     @Bean
+    CommandLineRunner commandLineRunner(BankService bankService){
+        return args -> {
+              bankService.consulter();
+        };
+    }
+
+
+    //@Bean
     CommandLineRunner start(CustomerRepository customerRepository,
                             BankAccountRepository bankAccountRepository,
                             AccountOperationRepository accountOperationRepository){
@@ -68,6 +75,8 @@ public class EbankingBackendApplication {
                     accountOperation.setBankAccount(acc);
                     accountOperationRepository.save(accountOperation);
                 }
+
+
             });
         };
     }
