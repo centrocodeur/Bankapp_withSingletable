@@ -1,5 +1,6 @@
-package com.marien.ebankingbackend.entities;
+package com.marien.ebankingbackend.dtos;
 
+import com.marien.ebankingbackend.entities.BankAccount;
 import com.marien.ebankingbackend.enums.OperationType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,12 +11,9 @@ import java.util.Date;
 
 
 
-@Entity
-@Data  @NoArgsConstructor @AllArgsConstructor
-public class AccountOperation {
+@Data
+public class AccountOperationDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Date operationDate;
@@ -24,10 +22,8 @@ public class AccountOperation {
 
     private  String description;
 
-    @Enumerated(EnumType.STRING)
     private OperationType type;
 
-   @ManyToOne
-    private  BankAccount bankAccount;
+
 
 }
